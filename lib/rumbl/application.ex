@@ -12,9 +12,18 @@ defmodule Rumbl.Application do
       Rumbl.Repo,
       # Start the endpoint when the application starts
       RumblWeb.Endpoint,
-      RumblWeb.Presence
+      RumblWeb.Presence,
       # Starts a worker by calling: Rumbl.Worker.start_link(arg)
       # {Rumbl.Worker, arg},
+      # Plug.Cowboy.child_spec(
+      #   scheme: :http,
+      #   plug: RumblProxy.Endpoint,
+      #   options: [port: 4100]
+      # )
+      # Rumbl.Config,
+      {Registry, keys: :unique, name: RumblProxy.WSReverseProxy.Registry},
+      RumblProxy.WSReverseProxy.ClientSupervisor,
+      RumblProxy.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -27,6 +36,7 @@ defmodule Rumbl.Application do
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
     RumblWeb.Endpoint.config_change(changed, removed)
+    # RumblProxy.Endpoint.config_change(changed, removed)
     :ok
   end
 end

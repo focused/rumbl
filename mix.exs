@@ -44,7 +44,12 @@ defmodule Rumbl.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:comeonin, "~> 4.1"},
-      {:pbkdf2_elixir, "~> 0.12"}
+      {:pbkdf2_elixir, "~> 0.12"},
+      {:websockex, "~> 0.4.2"},
+      {:tesla, "~> 1.2"},
+      {:hackney, "~> 1.15"}
+      # {:reverse_proxy_plug, "~> 1.2"},
+      # {:plug_proxy, "~> 0.4.0"}
     ]
   end
 

@@ -17,6 +17,25 @@ config :rumbl, RumblWeb.Endpoint,
   render_errors: [view: RumblWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Rumbl.PubSub, adapter: Phoenix.PubSub.PG2]
 
+proxy_dispatch = [
+  _: [
+    {
+      "/socket/websocket",
+      RumblProxy.WSReverseProxy,
+      callback_module: RumblProxy.WSReverseProxy.AAA
+    },
+    {:_, Phoenix.Endpoint.Cowboy2Handler, {RumblProxy.Endpoint, []}}
+  ]
+]
+
+config :rumbl, RumblProxy.Endpoint,
+  url: [host: "localhost"],
+  secret_key_base: "UifBuLXgGCObI4Xyil0N2xF6MKjr5rv4w32vdELhsv7n+PRREy5Wddl4t2C/aSlO",
+  render_errors: [view: RumblProxy.ErrorView, accepts: ~w(json)],
+  http: [dispatch: proxy_dispatch]
+
+# pubsub: [name: Rumbl.PubSub, adapter: Phoenix.PubSub.PG2]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
@@ -24,6 +43,8 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :tesla, adapter: Tesla.Adapter.Hackney
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
