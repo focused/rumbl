@@ -6,13 +6,13 @@ mix ecto.setup
 
 ## Usage
 
-1. login:
+### Login
 
 [http://localhost:4000/sessions/new](http://localhost:4000/sessions/new)
 email: "test1@test"
 pass: "123123"
 
-2. open a video channel:
+### Open a video channel
 
 [http://localhost:4000/manage/videos](http://localhost:4000/manage/videos)
 
