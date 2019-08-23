@@ -6,9 +6,14 @@ mix ecto.setup
 
 ## Usage
 
-1. Register: `/users/new` or login `/sessions/new`
-2. Create video: `/manage/videos/new`
-3. Watch and annotate: `/watch/1-slug`
-4. Try proxy: `http://localhost:4100/...`
+1. login:
 
+[http://localhost:4000/sessions/new](http://localhost:4000/sessions/new)
+email: "test1@test"
+pass: "123123"
 
+2. open a video channel:
+
+[http://localhost:4000/manage/videos](http://localhost:4000/manage/videos)
+
+[http://localhost:4000/watch/1-skyrim-modded](http://localhost:4000/watch/1-skyrim-modded)
